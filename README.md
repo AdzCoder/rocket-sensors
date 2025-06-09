@@ -40,7 +40,7 @@ An Arduino-based payload sensor system for water rocket telemetry data collectio
 
 ## Data Format
 
-Data is logged to SD card in CSV format with columns:
+Data is logged to the SD card in CSV format with columns:
 Time (ms), Pressure (Pa), Temp (°C), Height (m), AccX (m/s²), AccY (m/s²), AccZ (m/s²), AccTotal (m/s²), wX, wY, wZ
 
 ## Project Team
