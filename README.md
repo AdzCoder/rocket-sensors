@@ -58,7 +58,7 @@ Data is logged to the SD card in CSV format with the following columns:
 
 - Group A04  
 - University of Warwick, School of Engineering  
-- ES192 - Engineering Design Term 3 - Sprint 2 Electronic (22/23)
+- [ES192: Engineering Design (22/23)](https://courses.warwick.ac.uk/modules/2022/ES192-15) - Electronic Sprint 2
 
 ## Project Status
 
