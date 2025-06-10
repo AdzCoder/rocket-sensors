@@ -3,7 +3,7 @@
  * @brief Multi-sensor data logger for rocket flight telemetry with landing detection
  * @author Adil Wahab Bhatti
  * @version 3.0
- * @date 2024-06-09
+ * @date 2025-06-09
  * 
  * @description
  * This Arduino sketch implements a comprehensive data logging system for rocket flights,
