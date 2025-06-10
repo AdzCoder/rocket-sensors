@@ -31,7 +31,7 @@ The system was designed to collect flight data from a water rocket including:
 
 ## Circuit Design
 
-![Circuit Plan](docs/circuit_plan.png)
+![Circuit Plan](circuit_plan.png)
 
 Power:
 - 9V battery
