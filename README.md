@@ -26,7 +26,7 @@ An Arduino-based payload sensor system designed for collecting telemetry data du
 
 1. **Clone this repository**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/AdzCoder/rocket-sensor.git
     ```
 
 2. **Open the project**  
