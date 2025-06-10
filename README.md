@@ -4,9 +4,9 @@ An Arduino-based payload sensor system designed for collecting telemetry data du
 
 ## Features
 
-- Triaxial acceleration measurement (DFRobot WT61PC accelerometer)
-- Atmospheric pressure measurement (MPX4115A pressure sensor)
-- Temperature measurement (LM35DT sensor)
+- Triaxial acceleration measurement using the [DFRobot WT61PC accelerometer](https://github.com/DFRobot/DFRobot_WT61PC)
+- Atmospheric pressure measurement with the [MPX4115A pressure sensor](https://github.com/janlucaklees/MPX4115A-Arduino-library)
+- Temperature measurement via the [LM35DT temperature sensor](https://github.com/Erriez/ErriezLM35)
 - Data logging to microSD card
 - Audible recovery buzzer
 - Visual power indicator
@@ -14,7 +14,7 @@ An Arduino-based payload sensor system designed for collecting telemetry data du
 ## Hardware Requirements
 
 - Arduino Micro
-- DFRobot WT61PC accelerometer
+- [DFRobot WT61PC accelerometer](https://www.dfrobot.com/product-2200.html)
 - MPX4115A pressure sensor
 - LM35DT temperature sensor
 - MicroSD card breakout board
