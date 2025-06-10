@@ -1,6 +1,6 @@
 # Rocket Instrumentation System
 
-An Arduino-based payload sensor system for water rocket telemetry data collection.
+An Arduino-based payload sensor system designed for collecting telemetry data during water rocket flights.
 
 ## Features
 
@@ -40,17 +40,31 @@ An Arduino-based payload sensor system for water rocket telemetry data collectio
 
 ## Data Format
 
-Data is logged to the SD card in CSV format with columns:
-Time (ms), Pressure (Pa), Temp (°C), Height (m), AccX (m/s²), AccY (m/s²), AccZ (m/s²), AccTotal (m/s²), wX, wY, wZ
+Data is logged to the SD card in CSV format with the following columns:
+
+- **Time** (ms)  
+- **Pressure** (Pa)  
+- **Temperature** (°C)  
+- **Height** (m)  
+- **Acceleration X** (m/s²)  
+- **Acceleration Y** (m/s²)  
+- **Acceleration Z** (m/s²)  
+- **Total Acceleration** (m/s²)  
+- **Angular Velocity X** (wX)  
+- **Angular Velocity Y** (wY)  
+- **Angular Velocity Z** (wZ)  
 
 ## Project Team
-- A04
-- University of Warwick, School of Engineering
+
+- A04  
+- University of Warwick, School of Engineering  
 - ES192 2022/2023 Sprint 2 - Electronic
 
 ## Project Status
-This project was completed as part of coursework for the University of Warwick (ES192 module, 2022/2023). It is not actively maintained, but the code and documentation are provided here for reference and learning purposes.
+
+This project was completed as part of coursework for the University of Warwick (ES192 module, 2022/2023).  
+It is no longer actively maintained, but the code and documentation are provided for reference and learning purposes.
 
 ## License
 
-MIT License - see LICENSE file
+MIT License — see the [LICENSE](LICENSE) file for details.
