@@ -48,6 +48,9 @@ Time (ms), Pressure (Pa), Temp (°C), Height (m), AccX (m/s²), AccY (m/s²), Ac
 - University of Warwick, School of Engineering
 - ES192 2022/2023 Sprint 2 - Electronic
 
+## Project Status
+This project was completed as part of coursework for the University of Warwick (ES192 module, 2022/2023). It is not actively maintained, but the code and documentation are provided here for reference and learning purposes.
+
 ## License
 
 MIT License - see LICENSE file
