@@ -33,7 +33,9 @@ An Arduino-based payload sensor system designed for collecting telemetry data du
     Open `src/RocketSensors.ino` using the [Arduino IDE](https://www.arduino.cc/en/software).
 
 3. **Connect hardware**  
-    Follow the hardware setup instructions in [`DESIGN.md`](docs/DESIGN.md).
+   Follow the hardware setup instructions in [`DESIGN.md`](docs/DESIGN.md) or refer to the circuit diagram below:
+
+   ![Circuit Plan](docs/circuit_plan.png)
 
 4. **Upload to Arduino Micro**  
     Once hardware is connected and libraries are installed, upload the project to your Arduino Micro.
