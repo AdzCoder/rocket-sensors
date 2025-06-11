@@ -146,9 +146,7 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 
 - 📋 **[Design Documentation](docs/DESIGN.md)** — Detailed system architecture and component selection
 - 🔌 **[Wiring Diagrams](docs/circuit_plan.png)** — Complete electrical schematic
-- 📊 **[Data Analysis Guide](docs/analysis-guide.md)** — Post-flight data processing instructions
-- 🧪 **[Test Results](docs/testing/)** — Ground testing and validation data
-- 🛠️ **[Assembly Instructions](docs/assembly.md)** — Step-by-step construction guide
+- 🧪 **[Test Results](docs/TESTING.mb/)** — Ground testing and validation data
 
 ## Project Information
 
