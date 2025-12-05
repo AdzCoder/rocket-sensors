@@ -144,7 +144,6 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 4. **Recovery Mode** — Buzzer activation for payload location
 
 ### Safety Features
-- **Automatic Shutdown** — Low battery protection
 - **Data Integrity** — Regular file synchronisation to prevent data loss
 - **Fault Detection** — Sensor error handling and status reporting
 
@@ -152,7 +151,7 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 
 - 📋 **[Design Documentation](docs/DESIGN.md)** — Detailed system architecture and component selection
 - 🔌 **[Wiring Diagrams](docs/circuit_plan.png)** — Complete electrical schematic
-- 🧪 **[Test Results](docs/TESTING.mb/)** — Ground testing and validation data
+- 🧪 **[Test Results](docs/TESTING.md/)** — Ground testing and validation data
 
 ## Project Information
 
