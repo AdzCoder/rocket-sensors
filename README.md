@@ -51,19 +51,24 @@ An Arduino-based payload sensor system designed for collecting comprehensive tel
 ## Quick Start
 
 ### Prerequisites
-- **Arduino IDE** (version 1.8.0 or later)
+- **PlatformIO IDE** (VS Code extension recommended)
 - **MicroSD Card** (Class 10 recommended, FAT32 formatted)
 - **9V Battery** and connector cable
 
 ### Required Libraries
-Install the following libraries via Arduino Library Manager:
 
-| Library | Repository | Version | Purpose |
-|---------|------------|---------|---------|
-| [DFRobot WT61PC](https://github.com/DFRobot/DFRobot_WT61PC) | DFRobot Official | Latest | Accelerometer/gyroscope interface |
-| [MPX4115A](https://github.com/janlucaklees/MPX4115A-Arduino-library) | Community | v1.0+ | Pressure sensor reading |
-| [LM35](https://github.com/Erriez/ErriezLM35) | Erriez | v1.2+ | Temperature measurement |
-| SD | Arduino Built-in | Latest | SD card data logging |
+The following libraries are automatically managed via `platformio.ini`:
+
+```ini
+lib_deps = 
+   https://github.com/DFRobot/DFRobot_WT61PC.git @ 1.0.0
+   SD @ 1.2.4
+```
+
+| Library | Purpose | Documentation |
+|---------|---------|---------------|
+| **DFRobot_WT61PC** | IMU sensor interface for accelerometer/gyroscope data acquisition | [GitHub](https://github.com/DFRobot/DFRobot_WT61PC) |
+| **SD** | MicroSD card file system operations and data logging | [Arduino Reference](https://www.arduino.cc/reference/en/libraries/sd/) |
 
 ### Installation
 
