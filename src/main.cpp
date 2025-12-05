@@ -48,10 +48,6 @@
  * copies or substantial portions of the Software.
  */
 
-#include <SD.h>
-#include <DFRobot_WT61PC.h>
-#include <SoftwareSerial.h>
-
 // ============================================================================
 // CONFIGURATION & CONSTANTS
 // ============================================================================
