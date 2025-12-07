@@ -28,16 +28,24 @@ constexpr int BUZZER = 13;          // Landing detection buzzer
 
 namespace Config {
 constexpr unsigned long BUZZER_ARM_TIME = 15000;  // Time to arm buzzer (ms)
-constexpr unsigned long LOOP_DELAY = 200;         // Main loop delay (ms)
+constexpr unsigned long LOOP_DELAY =
+    100;  // Main loop delay (ms) - IMPROVED: Reduced from 200ms
 constexpr unsigned long LANDING_CONFIRM_TIME =
     2000;                                    // Landing confirmation time (ms)
 constexpr unsigned long IMU_TIMEOUT = 3000;  // IMU initialization timeout (ms)
 constexpr char DATA_FILENAME[] = "flight_data.txt";  // SD card data file
+
 constexpr float LANDING_ACC_MIN =
     9.0;  // Minimum acceleration for landing (m/s²)
 constexpr float LANDING_ACC_MAX =
     12.0;  // Maximum acceleration for landing (m/s²)
+
 constexpr int IMU_FREQUENCY = FREQUENCY_5HZ;  // Data output frequency
+
+// Error handling thresholds
+constexpr int MAX_SENSOR_FAILURES =
+    10;  // Max consecutive sensor failures before warning
+constexpr int MAX_SD_FAILURES = 5;  // Max consecutive SD write failures
 }  // namespace Config
 
 // ============================================================================
@@ -45,15 +53,20 @@ constexpr int IMU_FREQUENCY = FREQUENCY_5HZ;  // Data output frequency
 // ============================================================================
 
 namespace Calibration {
-constexpr float TEMP_VOLTAGE_REF =
-    5.0;  // Reference voltage for temperature sensor
-constexpr float TEMP_SCALE_FACTOR =
-    100.0;  // LM35DT conversion factor: 100°C per volt (from 10mV/°C)
-constexpr float PRESSURE_OFFSET = 0.095;    // MPX4115A offset
-constexpr float PRESSURE_SCALE = 0.000009;  // MPX4115A scale factor
+// Temperature sensor (LM35DT)
+constexpr float TEMP_VOLTAGE_REF = 5.0;     // Reference voltage
+constexpr float TEMP_SCALE_FACTOR = 100.0;  // LM35DT: 100°C per volt (10mV/°C)
+constexpr float TEMP_MIN = -55.0;  // LM35DT minimum valid temperature (°C)
+constexpr float TEMP_MAX = 150.0;  // LM35DT maximum valid temperature (°C)
+
+// Pressure sensor (MPX4115A)
+constexpr float PRESSURE_OFFSET = 0.095;  // MPX4115A offset
+constexpr float PRESSURE_SCALE = 0.009;   // MPX4115A scale factor
 constexpr float PRESSURE_MIN = 15000.0;  // MPX4115A minimum valid pressure (Pa)
 constexpr float PRESSURE_MAX =
     115000.0;  // MPX4115A maximum valid pressure (Pa)
+
+// Altitude calculation
 constexpr float ALTITUDE_EXPONENT = 1.0 / 5.257;  // Barometric formula exponent
 constexpr float REFERENCE_TEMP_K =
     15.0 + 273.15;  // Reference temperature in Kelvin

@@ -1,7 +1,7 @@
 # Rocket Instrumentation System
 
 [![Arduino](https://img.shields.io/badge/Arduino-Micro-blue?style=flat-square)](https://www.arduino.cc/en/hardware/micro)
-[![Licence](https://img.shields.io/badge/Licence-MIT-orange?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/Licence-MIT-orange?style=flat-square)](LICENSE)
 [![University](https://img.shields.io/badge/University-Warwick-green?style=flat-square)](https://warwick.ac.uk/)
 [![Status](https://img.shields.io/badge/Status-Educational-lightgrey?style=flat-square)](https://github.com/topics/education)
 [![Domain](https://img.shields.io/badge/Domain-Aerospace-red?style=flat-square)](https://en.wikipedia.org/wiki/Aerospace_engineering)
@@ -11,6 +11,7 @@
 An Arduino-based payload sensor system designed for collecting comprehensive telemetry data during water rocket flights. This compact instrumentation package provides real-time data acquisition for flight dynamics analysis, recovery assistance, and educational aerospace applications.
 
 ### Applications
+
 - **Educational Rocketry** — Hands-on aerospace engineering demonstrations
 - **Flight Dynamics Research** — Data collection for trajectory and performance analysis
 - **STEM Outreach** — Interactive learning platform for physics and engineering concepts
@@ -28,6 +29,7 @@ An Arduino-based payload sensor system designed for collecting comprehensive tel
 ## Technical Specifications
 
 ### Performance Characteristics
+
 - **Data Acquisition Rate:** Up to 100 Hz sampling frequency
 - **Flight Duration:** 15+ minutes continuous logging (9V battery)
 - **Altitude Range:** 0-1000m (limited by pressure sensor)
@@ -35,13 +37,15 @@ An Arduino-based payload sensor system designed for collecting comprehensive tel
 - **Operating Temperature:** -10°C to +85°C
 
 ### Sensor Array
-| Sensor | Model | Measurement | Range | Precision |
-|--------|--------|-------------|--------|-----------|
-| **Accelerometer/Gyroscope** | [DFRobot WT61PC](https://www.dfrobot.com/product-2200.html) | 3-axis acceleration & angular velocity | ±16g, ±2000°/s | 16-bit resolution |
-| **Pressure Sensor** | MPX4115A | Atmospheric pressure | 15-115 kPa | ±1.5% accuracy |
-| **Temperature Sensor** | LM35DT | Ambient temperature | -55°C to +150°C | ±0.5°C accuracy |
+
+| Sensor                      | Model                                                       | Measurement                            | Range           | Precision         |
+| --------------------------- | ----------------------------------------------------------- | -------------------------------------- | --------------- | ----------------- |
+| **Accelerometer/Gyroscope** | [DFRobot WT61PC](https://www.dfrobot.com/product-2200.html) | 3-axis acceleration & angular velocity | ±16g, ±2000°/s  | 16-bit resolution |
+| **Pressure Sensor**         | MPX4115A                                                    | Atmospheric pressure                   | 15-115 kPa      | ±1.5% accuracy    |
+| **Temperature Sensor**      | LM35DT                                                      | Ambient temperature                    | -55°C to +150°C | ±0.5°C accuracy   |
 
 ### Hardware Components
+
 - **Microcontroller:** Arduino Micro (ATmega32U4)
 - **Storage:** MicroSD card (FAT32 formatted)
 - **Power:** 9V alkaline battery (6-12V input range)
@@ -51,6 +55,7 @@ An Arduino-based payload sensor system designed for collecting comprehensive tel
 ## Quick Start
 
 ### Prerequisites
+
 - **PlatformIO IDE** (VS Code extension recommended)
 - **MicroSD Card** (Class 10 recommended, FAT32 formatted)
 - **9V Battery** and connector cable
@@ -60,39 +65,41 @@ An Arduino-based payload sensor system designed for collecting comprehensive tel
 The following libraries are automatically managed via `platformio.ini`:
 
 ```ini
-lib_deps = 
+lib_deps =
    https://github.com/DFRobot/DFRobot_WT61PC.git @ 1.0.0
    SD @ 1.2.4
 ```
 
-| Library | Purpose | Documentation |
-|---------|---------|---------------|
-| **DFRobot_WT61PC** | IMU sensor interface for accelerometer/gyroscope data acquisition | [GitHub](https://github.com/DFRobot/DFRobot_WT61PC) |
-| **SD** | MicroSD card file system operations and data logging | [Arduino Reference](https://www.arduino.cc/reference/en/libraries/sd/) |
+| Library            | Purpose                                                           | Documentation                                                          |
+| ------------------ | ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **DFRobot_WT61PC** | IMU sensor interface for accelerometer/gyroscope data acquisition | [GitHub](https://github.com/DFRobot/DFRobot_WT61PC)                    |
+| **SD**             | MicroSD card file system operations and data logging              | [Arduino Reference](https://www.arduino.cc/reference/en/libraries/sd/) |
 
 ### Installation
 
 1. **Clone the Repository**
+
    ```bash
    git clone https://github.com/AdzCoder/rocket-sensor.git
    cd rocket-sensor
    ```
 
 2. **Hardware Assembly**
-   
+
    Follow the detailed wiring instructions in [`DESIGN.md`](docs/DESIGN.md) or reference the circuit diagram:
-   
+
    ![Circuit Plan](docs/circuit_plan.png)
-   
+
    **Key Connections:**
-   - WT61PC: I2C (SDA/SCL pins)
-   - MPX4115A: Analogue pin A0
-   - LM35DT: Analogue pin A1
-   - SD Module: SPI interface
-   - Buzzer: Digital pin 8
-   - LED: Digital pin 13
+   - WT61PC: SoftwareSerial on pins 10(RX), 11(TX)
+   - MPX4115A: Analogue pin A2
+   - LM35DT: Analogue pin A3
+   - SD Module: SPI interface, CS pin 17
+   - Buzzer: Digital pin 13
+   - LED: Digital pin 13 (onboard)
 
 3. **Software Upload**
+
    ```bash
    # Open project in PlatformIO
    pio run
@@ -111,25 +118,28 @@ lib_deps =
 
 ## Data Output
 
-### CSV File Format
-Data is logged to the SD card as a `.CSV` with timestamp-based naming:
+### TXT File Format
+
+Data is logged to `flight_data.txt` on the SD card in CSV format:
 
 ```csv
 Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(m/s2),TotalAccel(m/s2),GyroX(deg/s),GyroY(deg/s),GyroZ(deg/s)
 ```
 
 ### Sample Data Structure
-| Column | Unit | Description |
-|--------|------|-------------|
-| **Time** | ms | Milliseconds since system startup |
-| **Pressure** | Pa | Atmospheric pressure (absolute) |
-| **Temperature** | °C | Ambient temperature |
-| **Height** | m | Calculated altitude above launch point |
-| **AccelX/Y/Z** | m/s² | Triaxial acceleration components |
-| **TotalAccel** | m/s² | Vector magnitude of acceleration |
-| **GyroX/Y/Z** | °/s | Angular velocity components |
+
+| Column          | Unit | Description                            |
+| --------------- | ---- | -------------------------------------- |
+| **Time**        | ms   | Milliseconds since system startup      |
+| **Pressure**    | Pa   | Atmospheric pressure (absolute)        |
+| **Temperature** | °C   | Ambient temperature                    |
+| **Height**      | m    | Calculated altitude above launch point |
+| **AccelX/Y/Z**  | m/s² | Triaxial acceleration components       |
+| **TotalAccel**  | m/s² | Vector magnitude of acceleration       |
+| **GyroX/Y/Z**   | °/s  | Angular velocity components            |
 
 ### Post-Flight Analysis
+
 - **Flight Phases:** Launch, coast, apogee, descent identification
 - **Performance Metrics:** Maximum altitude, peak acceleration, flight duration
 - **Trajectory Analysis:** Velocity and position estimation through integration
@@ -138,13 +148,23 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 ## System Operation
 
 ### Flight Modes
-1. **Pre-Launch** — System initialisation and sensor calibration
+
+1. **Pre-Launch** — System initialization and sensor calibration
 2. **Launch Detection** — Acceleration threshold triggering
 3. **Flight Logging** — High-frequency data acquisition
 4. **Recovery Mode** — Buzzer activation for payload location
 
+### Recovery Buzzer Activation
+
+The recovery system uses intelligent landing detection:
+
+- Arms after 15 seconds of operation to prevent false triggers during setup
+- Activates when landed condition detected (9-12 m/s² total acceleration sustained for 2+ seconds)
+- Provides 85dB alert for payload location assistance
+
 ### Safety Features
-- **Data Integrity** — Regular file synchronisation to prevent data loss
+
+- **Data Integrity** — Regular file synchronization to prevent data loss
 - **Fault Detection** — Sensor error handling and status reporting
 
 ## Documentation
@@ -161,6 +181,7 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 **Sprint:** Electronic Systems Design Sprint 2
 
 ### Learning Objectives
+
 - **Sensor Integration** — Multi-sensor data fusion and calibration
 - **Real-time Systems** — High-frequency data acquisition under constraints
 - **Embedded Programming** — Arduino development for aerospace applications
@@ -169,20 +190,22 @@ Time(ms),Pressure(Pa),Temperature(C),Height(m),AccelX(m/s2),AccelY(m/s2),AccelZ(
 ## Troubleshooting
 
 ### Common Issues
-| Problem | Symptoms | Solution |
-|---------|----------|----------|
-| **No Data Logging** | LED on, no CSV file | Check SD card formatting (FAT32) |
-| **Sensor Errors** | Serial output shows NaN | Verify I2C connections and library versions |
-| **Power Issues** | Intermittent operation | Check 9V battery voltage (>7V required) |
-| **Recovery Buzzer** | No sound after flight | Verify buzzer connections and pin 8 continuity |
+
+| Problem             | Symptoms                | Solution                                               |
+| ------------------- | ----------------------- | ------------------------------------------------------ |
+| **No Data Logging** | LED on, no TXT file     | Check SD card formatting (FAT32)                       |
+| **Sensor Errors**   | Serial output shows NaN | Verify SoftwareSerial connections and library versions |
+| **Power Issues**    | Intermittent operation  | Check 9V battery voltage (>7V required)                |
+| **Recovery Buzzer** | No sound after flight   | Verify buzzer connections and pin 13 continuity        |
 
 ## Future Enhancements
 
 Identified improvements for next iteration:
+
 - **GPS Integration** — Absolute position tracking for recovery
 - **Wireless Telemetry** — Real-time data transmission during flight
 - **Advanced Sensors** — Magnetometer for orientation determination
-- **Data Visualisation** — Onboard display for real-time monitoring
+- **Data Visualization** — Onboard display for real-time monitoring
 - **Multi-Stage Detection** — Support for multi-stage rocket configurations
 
 ## Contributing
@@ -202,10 +225,10 @@ This educational project has been completed, but contributions are welcome:
 
 This project successfully demonstrated practical application of embedded systems in aerospace instrumentation and provided valuable hands-on experience in sensor integration and real-time data acquisition.
 
-## Licence
+## License
 
-MIT Licence — see the [LICENCE](LICENSE) file for details.
+MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-*Developed as part of the Engineering Design module at the University of Warwick. This project showcases practical application of electronic systems in aerospace engineering education.*
+_Developed as part of the Engineering Design module at the University of Warwick. This project showcases practical application of electronic systems in aerospace engineering education._

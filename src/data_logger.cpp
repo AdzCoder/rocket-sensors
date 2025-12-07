@@ -17,7 +17,7 @@ bool initializeDataLogging() {
 
   if (!SD.begin(Pins::SD_CHIP_SELECT)) {
     if (DEBUG_ENABLED) {
-      Serial.println(F("ERROR: SD card initialization failed!"));
+      Serial.println(F("⚠ ERROR: SD card initialization failed!"));
     }
     return false;
   }
@@ -42,12 +42,13 @@ bool initializeDataLogging() {
 }
 
 /**
- * @brief Write sensor data to SD card
+ * @brief Write sensor data to SD card with error tracking
  */
 void logDataToSD() {
   if (!systemState.sdCardReady) return;
 
   dataFile = SD.open(Config::DATA_FILENAME, FILE_WRITE);
+
   if (dataFile) {
     // Write data in CSV format
     dataFile.print(sensors.timestamp);
@@ -72,8 +73,29 @@ void logDataToSD() {
     dataFile.print(",");
     dataFile.println(sensors.gyroZ, 3);
     dataFile.close();
-  } else if (DEBUG_ENABLED) {
-    Serial.println(F("ERROR: Failed to write to SD card"));
+
+    // Reset failure counter on successful write
+    systemState.sdWriteFailureCount = 0;
+
+  } else {
+    // Increment failure counter
+    systemState.sdWriteFailureCount++;
+
+    if (DEBUG_ENABLED) {
+      Serial.print(F("⚠ ERROR: Failed to write to SD card ("));
+      Serial.print(systemState.sdWriteFailureCount);
+      Serial.println(F(" consecutive failures)"));
+    }
+
+    // Disable SD logging after threshold exceeded
+    if (systemState.sdWriteFailureCount >= Config::MAX_SD_FAILURES) {
+      systemState.sdCardReady = false;
+
+      if (DEBUG_ENABLED) {
+        Serial.println(
+            F("⚠ CRITICAL: SD card disabled due to repeated failures"));
+      }
+    }
   }
 }
 

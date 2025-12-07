@@ -31,13 +31,19 @@ struct SensorReadings {
 };
 
 /**
- * @brief Structure to hold system state information
+ * @brief Structure to hold system state and error tracking
  */
 struct SystemState {
-  float referencePressure =
-      0.0;  // Ground level pressure for altitude calculation (Pa)
-  bool sdCardReady = false;  // SD card initialization status
-  bool buzzerArmed = false;  // Landing detection buzzer status
+  float referencePressure = 0.0;      // Ground level pressure (Pa)
+  float referenceTemperature = 25.0;  // Last known good temperature (°C)
+  bool sdCardReady = false;           // SD card initialization status
+  bool buzzerArmed = false;           // Landing detection buzzer status
+  bool imuAvailable = false;          // IMU sensor availability status
+
+  // Error counters
+  int pressureFailureCount = 0;     // Consecutive pressure read failures
+  int temperatureFailureCount = 0;  // Consecutive temperature read failures
+  int sdWriteFailureCount = 0;      // Consecutive SD write failures
 };
 
 // ============================================================================
@@ -54,14 +60,14 @@ extern SystemState systemState;   // Current system state
 // ============================================================================
 
 /**
- * @brief Read temperature from LM35DT sensor
+ * @brief Read temperature from LM35DT sensor with validation
  * @param pin Analog pin connected to temperature sensor
  * @return Temperature in Celsius
  */
 float readTemperature(int pin);
 
 /**
- * @brief Read pressure from MPX4115A sensor
+ * @brief Read pressure from MPX4115A sensor with validation
  * @param pin Analog pin connected to pressure sensor
  * @return Pressure in Pascals
  */
