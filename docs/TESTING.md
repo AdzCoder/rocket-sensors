@@ -128,7 +128,7 @@
    - Workaround: Use pressure sensor temperature compensation
    - Future fix: Relocate sensor away from high-frequency digital lines
 
-2. **SD Card Initialization Delay**
+2. **SD Card Initialisation Delay**
    - Impact: 2-3 second startup delay
    - Mitigation: Acceptable for pre-launch preparation time
 
