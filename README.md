@@ -227,8 +227,8 @@ This project successfully demonstrated practical application of embedded systems
 
 ## License
 
-MIT License — see the [LICENSE](LICENSE) file for details.
+MIT Licence — see the [LICENCE](LICENSE) file for details.
 
 ---
 
-_Developed as part of the Engineering Design module at the University of Warwick. This project showcases practical application of electronic systems in aerospace engineering education._
+*Developed by Adil Wahab Bhatti as part of academic coursework at the University of Warwick.*

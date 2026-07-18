@@ -43,7 +43,7 @@ float readTemperature(int pin) {
  */
 float readPressure(int pin) {
   int rawReading = analogRead(pin);
-  // FIX: Use Calibration::TEMP_VOLTAGE_REF instead of hardcoded 5.0
+  // Convert ADC reading to voltage using the shared reference
   float voltage = (rawReading / 1023.0) * Calibration::TEMP_VOLTAGE_REF;
 
   // MPX4115A: Vout = VS × (0.009 × P - 0.095) where P is in kPa
@@ -81,7 +81,7 @@ float calculateAltitude(float currentPressure, float referencePressure) {
 
   float pressureRatio = referencePressure / currentPressure;
 
-  // FIX: Handle negative or invalid pressure ratios
+  // Guard against non-physical pressure ratios
   if (pressureRatio <= 0.0) return 0.0;
 
   float altitudeFactor =
@@ -130,7 +130,7 @@ void checkLandingCondition() {
   if (inLandingRange) {
     if (landingStartTime == 0) {
       landingStartTime = millis();
-      // FIX: Handle millis() overflow with proper unsigned arithmetic
+      // Unsigned subtraction below is overflow-safe
     } else if ((unsigned long)(millis() - landingStartTime) >=
                Config::LANDING_CONFIRM_TIME) {
       digitalWrite(Pins::BUZZER, HIGH);
@@ -191,7 +191,7 @@ bool initializeIMU() {
 void initializeReferencePressure() {
   delay(1000);  // Allow sensors to stabilize
 
-  // FIX: Validate reference pressure reading before storing
+  // Validate the reading before storing it as the ground reference
   float pressure = readPressure(Pins::PRESSURE);
 
   // Only store if within valid range

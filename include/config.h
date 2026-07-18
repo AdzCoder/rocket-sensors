@@ -29,7 +29,7 @@ constexpr int BUZZER = 13;          // Landing detection buzzer
 namespace Config {
 constexpr unsigned long BUZZER_ARM_TIME = 15000;  // Time to arm buzzer (ms)
 constexpr unsigned long LOOP_DELAY =
-    100;  // Main loop delay (ms) - IMPROVED: Reduced from 200ms
+    100;  // Main loop delay (ms)
 constexpr unsigned long LANDING_CONFIRM_TIME =
     2000;                                    // Landing confirmation time (ms)
 constexpr unsigned long IMU_TIMEOUT = 3000;  // IMU initialization timeout (ms)
